@@ -4,15 +4,4 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
-
-  <servlet>
-    <servlet-name>primeiraServlet</servlet-name>
-    <servlet-class>br.com.ideao.f21agenda.servlet.OIMundo</servlet-class>
-  </servlet>
-
-  <servlet-mapping>
-    <servlet-name>primeiraServlet</servlet-name>
-    <url-pattern>/oi</url-pattern>
-  </servlet-mapping>
-
 </web-app>
