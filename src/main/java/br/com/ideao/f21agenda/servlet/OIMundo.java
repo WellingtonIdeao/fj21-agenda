@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet(name = "primeiraServlet", value = "/oi")
+@WebServlet(name = "primeiraServlet", urlPatterns = {"/oi", "ola"})
 public class OIMundo extends HttpServlet  {
 
     @Override
