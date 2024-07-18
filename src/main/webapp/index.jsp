@@ -1,5 +1,6 @@
-<html>
+<html lang="pt-BR">
     <head>
+        <meta charset="UTF-8">
         <title>Projeto fj21-agenda</title>
     </head>
     <body>
