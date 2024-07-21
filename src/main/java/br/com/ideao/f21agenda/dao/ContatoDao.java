@@ -44,8 +44,8 @@ public class ContatoDao {
 
     private void transformaResultSetEmContato(PreparedStatement pstmt, List<Contato> contatos) throws SQLException {
         try (ResultSet rs = pstmt.getResultSet()) {
-            Calendar data = Calendar.getInstance();
             while (rs.next()) {
+                Calendar data = Calendar.getInstance();
                 Contato contato = new Contato();
                 contato.setNome(rs.getString("nome"));
                 contato.setEmail(rs.getString("email"));
