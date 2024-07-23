@@ -1,4 +1,6 @@
 <%@ page import="br.com.ideao.f21agenda.dao.ContatoDao, br.com.ideao.f21agenda.model.Contato, br.com.ideao.f21agenda.factory.ConnectionFactory, java.util.List, java.sql.Connection, java.sql.SQLException" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -12,6 +14,8 @@
         try (Connection connection = new ConnectionFactory().getConnection()) {
             ContatoDao dao = new ContatoDao(connection);
             contatos = dao.getLista();
+            request.setAttribute("lista", contatos);
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -24,17 +28,17 @@
                 <th scope="col">Data de Nascimento</th>
             </tr>
         </thead>
-    <%  for (Contato contato: contatos) { %>
+
+    <c:forEach var="contato" items="${lista}">
         <tbody>
             <tr>
-                <th scope="row"><%=contato.getNome() %></th>
-                <td><%=contato.getEmail() %></td>
-                <td><%=contato.getEndereco() %></td>
-                <td><%=contato.getDataNascimento().getTime() %></td>
+                <th scope="row">${contato.nome}</th>
+                <td>${contato.email}</td>
+                <td>${contato.endereco}</td>
+                <td><fmt:formatDate value="${contato.dataNascimento.time}" pattern="dd/MM/yyyy" /></td>
             </tr>
         </tbody>
-
-    <% } %>
+    </c:forEach>
         <tfoot>
             <tr>
                 <th scope="row" colspan="4"></th>
