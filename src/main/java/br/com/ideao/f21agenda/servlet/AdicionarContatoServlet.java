@@ -4,6 +4,7 @@ import br.com.ideao.f21agenda.dao.ContatoDao;
 import br.com.ideao.f21agenda.factory.ConnectionFactory;
 import br.com.ideao.f21agenda.model.Contato;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -53,11 +54,7 @@ public class AdicionarContatoServlet extends HttpServlet {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        out.println("<html>");
-        out.println("<body>");
-        out.println("Contato " + contato.getNome() +
-                " adicionado com sucesso");
-        out.println("</body>");
-        out.println("</html>");
+        RequestDispatcher rd = req.getRequestDispatcher("/contato-adicionado.jsp");
+        rd.forward(req, resp);
     }
 }
