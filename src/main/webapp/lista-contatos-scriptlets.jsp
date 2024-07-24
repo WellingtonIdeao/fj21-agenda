@@ -1,4 +1,3 @@
-<%@ page import="br.com.ideao.f21agenda.dao.ContatoDao, br.com.ideao.f21agenda.model.Contato, br.com.ideao.f21agenda.factory.ConnectionFactory, java.util.List, java.sql.Connection, java.sql.SQLException" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <html lang="en">
@@ -9,17 +8,6 @@
 <body>
 <link href="css/table.css" rel="stylesheet" type="text/css">
     <table>
-    <%
-        List<Contato> contatos = null;
-        try (Connection connection = new ConnectionFactory().getConnection()) {
-            ContatoDao dao = new ContatoDao(connection);
-            contatos = dao.getLista();
-            request.setAttribute("lista", contatos);
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    %>
         <thead>
             <tr>
                 <th scope="col">Nome</th>
@@ -29,7 +17,7 @@
             </tr>
         </thead>
 
-    <c:forEach var="contato" items="${lista}">
+    <c:forEach var="contato" items="${contatos}">
         <tbody>
             <tr>
                 <th scope="row">${contato.nome}</th>
