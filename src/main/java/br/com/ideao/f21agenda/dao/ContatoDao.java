@@ -47,6 +47,7 @@ public class ContatoDao {
             while (rs.next()) {
                 Calendar data = Calendar.getInstance();
                 Contato contato = new Contato();
+                contato.setId(rs.getLong("id"));
                 contato.setNome(rs.getString("nome"));
                 contato.setEmail(rs.getString("email"));
                 contato.setEndereco(rs.getString("endereco"));
@@ -55,6 +56,17 @@ public class ContatoDao {
 
                 contatos.add(contato);
             }
+        }
+    }
+
+    public void exclui(Contato contato) {
+        String sql = "DELETE FROM contato WHERE id=?";
+
+        try(PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            pstmt.setLong(1, contato.getId());
+            pstmt.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 }
