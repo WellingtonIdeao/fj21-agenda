@@ -54,7 +54,7 @@ public class AdicionarContatoServlet extends HttpServlet {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        RequestDispatcher rd = req.getRequestDispatcher("/contato-adicionado.jsp");
+        RequestDispatcher rd = req.getRequestDispatcher("WEB-INF/jsp/contato-adicionado.jsp");
         rd.forward(req, resp);
     }
 }

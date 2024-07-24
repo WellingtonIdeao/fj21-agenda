@@ -18,6 +18,6 @@ public class ListaContatosLogica implements Logica{
             List<Contato> contatos = dao.getLista();
             req.setAttribute("contatos", contatos);
         }
-        return "lista-contatos-scriptlets.jsp";
+        return "WEB-INF/jsp/lista-contatos-scriptlets.jsp";
     }
 }
