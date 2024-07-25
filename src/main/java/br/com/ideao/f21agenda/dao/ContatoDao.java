@@ -69,4 +69,45 @@ public class ContatoDao {
             throw new RuntimeException(e);
         }
     }
+
+    public void altera(Contato contato) {
+        String sql = "UPDATE contato SET nome=?, email=?, endereco=?, dataNascimento=? WHERE id=?";
+        try(PreparedStatement pstmt = connection.prepareStatement(sql)) {
+
+            pstmt.setString(1, contato.getNome());
+            pstmt.setString(2, contato.getEmail());
+            pstmt.setString(3, contato.getEndereco());
+            pstmt.setDate(4, new Date(contato.getDataNascimento().getTimeInMillis()));
+            pstmt.setLong(5, contato.getId());
+
+            pstmt.execute();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public Contato busca(long id) {
+        String sql = "SELECT * FROM contato WHERE id=?";
+        Contato c = new Contato();
+        Calendar data = Calendar.getInstance();
+
+        try(PreparedStatement pstmt = this.connection.prepareStatement(sql)) {
+            pstmt.setLong(1, id);
+
+            try(ResultSet rs = pstmt.executeQuery()) {
+                while(rs.next()){
+                    c.setId(rs.getLong("id"));
+                    c.setNome(rs.getString("nome"));
+                    c.setEmail(rs.getString("email"));
+                    c.setEndereco(rs.getString("endereco"));
+                    data.setTime(rs.getDate("dataNascimento"));
+                    c.setDataNascimento(data);
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return c;
+    }
 }
