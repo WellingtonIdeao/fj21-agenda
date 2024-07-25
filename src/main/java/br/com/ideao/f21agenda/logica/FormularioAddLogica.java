@@ -7,7 +7,6 @@ public class FormularioAddLogica implements Logica {
 
     @Override
     public String executa(HttpServletRequest req, HttpServletResponse resp) throws Exception {
-        req.setAttribute("redirect", "AdicionaContatoLogica");
         return "WEB-INF/jsp/formulario-contato.jsp";
     }
 }

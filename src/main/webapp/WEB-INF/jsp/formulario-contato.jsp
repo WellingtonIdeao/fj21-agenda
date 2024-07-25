@@ -5,7 +5,7 @@
     <title>Contato</title>
 </head>
 <body>
-    <form action="mvc?logica=${redirect}" method="POST">
+    <form action="mvc?logica=AddAlterLogica" method="POST">
         <input type="hidden" name="id" value="${contato.id}"/>
         Nome: <input type="text" name="nome" value="${contato.nome}" /> <br/>
         E-mail: <input type="text" name="email" value="${contato.email}" /> <br/>

@@ -15,8 +15,6 @@ public class FormularioAlterarLogica implements Logica {
         try(Connection connection = new ConnectionFactory().getConnection()) {
             ContatoDao dao = new ContatoDao(connection);
             Contato contato = dao.busca(id);
-
-            req.setAttribute("redirect", "AlteraContatoLogica");
             req.setAttribute("contato", contato);
         }
         return "WEB-INF/jsp/formulario-contato.jsp";
