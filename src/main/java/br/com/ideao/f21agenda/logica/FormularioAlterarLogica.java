@@ -12,11 +12,13 @@ public class FormularioAlterarLogica implements Logica {
     @Override
     public String executa(HttpServletRequest req, HttpServletResponse resp) throws Exception {
         long id = Long.parseLong(req.getParameter("id"));
-        try(Connection connection = new ConnectionFactory().getConnection()) {
-            ContatoDao dao = new ContatoDao(connection);
-            Contato contato = dao.busca(id);
-            req.setAttribute("contato", contato);
-        }
+
+        Connection connection = (Connection) req.getAttribute("connection");
+        ContatoDao dao = new ContatoDao(connection);
+
+        Contato contato = dao.busca(id);
+        req.setAttribute("contato", contato);
+
         return "WEB-INF/jsp/formulario-contato.jsp";
     }
 }

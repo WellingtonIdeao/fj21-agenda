@@ -40,12 +40,10 @@ public class AdicionaContatoLogica implements Logica {
         contato.setDataNascimento(dataNascimento);
 
 
-        try(Connection connection = new ConnectionFactory().getConnection()) {
-            ContatoDao contatoDao = new ContatoDao(connection);
-            contatoDao.adicionar(contato);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        Connection connection = (Connection) req.getAttribute("connection");
+        ContatoDao contatoDao = new ContatoDao(connection);
+        contatoDao.adicionar(contato);
+
         System.out.println("Adicionando contato...");
         return "WEB-INF/jsp/contato-adicionado.jsp";
     }

@@ -13,14 +13,15 @@ public class RemoveContatoLogica implements Logica{
     @Override
     public String executa(HttpServletRequest req, HttpServletResponse resp) throws Exception {
         long id = Long.parseLong(req.getParameter("id"));
-        try(Connection connection = new ConnectionFactory().getConnection()){
-            ContatoDao dao = new ContatoDao(connection);
-            Contato contato = new Contato();
-            contato.setId(id);
+        Connection connection = (Connection) req.getAttribute("connection");
+        ContatoDao dao = new ContatoDao(connection);
 
-            dao.exclui(contato);
-            System.out.println("Excluindo contato...");
-        }
+        Contato contato = new Contato();
+        contato.setId(id);
+
+        dao.exclui(contato);
+        System.out.println("Excluindo contato...");
+
         return "mvc?logica=ListaContatosLogica";
     }
 }

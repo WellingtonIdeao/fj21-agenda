@@ -13,11 +13,12 @@ public class ListaContatosLogica implements Logica{
 
     @Override
     public String executa(HttpServletRequest req, HttpServletResponse resp) throws Exception {
-        try(Connection connection = new ConnectionFactory().getConnection()) {
-            ContatoDao dao = new ContatoDao(connection);
-            List<Contato> contatos = dao.getLista();
-            req.setAttribute("contatos", contatos);
-        }
+        Connection connection = (Connection) req.getAttribute("connection");
+        ContatoDao dao = new ContatoDao(connection);
+
+        List<Contato> contatos = dao.getLista();
+        req.setAttribute("contatos", contatos);
+
         return "WEB-INF/jsp/lista-contatos-scriptlets.jsp";
     }
 }

@@ -17,30 +17,29 @@ public class AlteraContatoLogica implements Logica {
     @Override
     public String executa(HttpServletRequest req, HttpServletResponse resp) throws Exception {
         long id = Long.parseLong(req.getParameter("id"));
-        try(Connection connection = new ConnectionFactory().getConnection()){
-            ContatoDao dao = new ContatoDao(connection);
+        Connection connection = (Connection) req.getAttribute("connection");
+        ContatoDao dao = new ContatoDao(connection);
 
-            String dataEmTexto = req.getParameter("dataNascimento");
-            Calendar dataNascimento = null;
-            try {
-                Date data = new SimpleDateFormat("dd/MM/yyyy").parse(dataEmTexto);
-                dataNascimento = Calendar.getInstance();
-                dataNascimento.setTime(data);
-
-            } catch (ParseException e) {
-                throw new RuntimeException("Erro de conversão da data");
-            }
-
-            Contato contato = new Contato();
-            contato.setId(id);
-            contato.setNome(req.getParameter("nome"));
-            contato.setEmail(req.getParameter("email"));
-            contato.setEndereco(req.getParameter("endereco"));
-            contato.setDataNascimento(dataNascimento);
-
-            dao.altera(contato);
-            System.out.println("Alterando contato...");
+        String dataEmTexto = req.getParameter("dataNascimento");
+        Calendar dataNascimento = null;
+        try {
+            Date data = new SimpleDateFormat("dd/MM/yyyy").parse(dataEmTexto);
+            dataNascimento = Calendar.getInstance();
+            dataNascimento.setTime(data);
+        } catch (ParseException e) {
+            throw new RuntimeException("Erro de conversão da data");
         }
+
+        Contato contato = new Contato();
+        contato.setId(id);
+        contato.setNome(req.getParameter("nome"));
+        contato.setEmail(req.getParameter("email"));
+        contato.setEndereco(req.getParameter("endereco"));
+        contato.setDataNascimento(dataNascimento);
+
+        dao.altera(contato);
+        System.out.println("Alterando contato...");
+
         return "WEB-INF/jsp/contato-alterado.jsp";
     }
 }
