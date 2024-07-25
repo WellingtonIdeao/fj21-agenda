@@ -7,6 +7,8 @@
 </head>
 <body>
 <link href="css/table.css" rel="stylesheet" type="text/css">
+<a href="mvc?logica=FormularioAddLogica">Incluir novo contato</a>
+
     <table>
         <thead>
             <tr>

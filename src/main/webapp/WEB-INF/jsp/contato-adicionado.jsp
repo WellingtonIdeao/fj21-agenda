@@ -6,5 +6,6 @@
 </head>
 <body>
     Contato ${param.nome} adicionado com sucesso.
+    <p><a href="mvc?logica=ListaContatosLogica">Lista de Contatos</a></p>
 </body>
 </html>
